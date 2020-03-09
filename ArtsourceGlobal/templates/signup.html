@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+form {border: 0px solid #f1f1f1;}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 5px 20px;
+    margin: 0.5px 0;
+    display: inline-block;
+    border: 1.5px solid #4e555b;
+    box-sizing: border-box;
+    box-shadow: lightslategray;
+}
+button {
+    width: 100%;
+    height: 35px !important;
+    margin: 0 auto;
+    font-size: 10px;
+	margin-bottom: 20px;
+    color: white;
+	background-color: #002752;
+}
+button:hover, button:focus {
+    opacity: 0.6;
+    color: #fff;
+}
+#login {
+    padding-top: 50px
+}
+#login .form-wrap {
+
+    width: 30%;
+    margin: 0 auto;
+}
+#login h2 {
+    color: black;
+    font-size: 20px;
+    text-align: center;
+    font-weight: lighter;
+    padding-bottom: 1px;
+}
+
+
+#login h3 {
+    color: red;
+    font-size: 13px;
+    text-align: center;
+    font-weight: lighter;
+    padding-bottom: 20px;
+}
+
+.hr-text {
+    font-size: 1px;
+  line-height: 2em;
+  position: relative;
+  outline: 0;
+  border: 0;
+  color: black;
+  text-align: center;
+  height: 2em;
+  opacity: 0.7;
+    margin-bottom: 20px;
+}
+.hr-text:before {
+  content: "";
+  background: linear-gradient(to right, transparent, #818078, transparent);
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+}
+.hr-text:after {
+  content: attr(data-content);
+  position: relative;
+  display: inline-block;
+  color: black;
+  padding: 0 0.5em;
+  line-height: 1.5em;
+  color: #818078;
+  background-color: #fcfcfa;
+}
+
+
+#login .form-group {
+    margin-bottom: 25px;
+}
+
+#login .register {
+    color: #1fa67b;
+}
+/*    --------------------------------------------------
+	:: Inputs & Buttons
+	-------------------------------------------------- */
+
+/*    --------------------------------------------------
+    :: Footer
+	-------------------------------------------------- */
+.footer {
+    color: #6d6d6d;
+    font-size: 12px;
+    text-align: center;
+}
+#footer p {
+    margin-bottom: 0;
+}
+#footer a {
+    color: inherit;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+       display: block;
+       float: none;
+    }
+}
+</style>
+</head>
+<body>
+<img class="responsive-header-img" height="auto" width ="7%" src= {% static 'homepage/img/ASG_logo.png'%} alt="">
+<section id="login">
+    <div class="form-wrap">
+
+<h2>Create Account   <img class="responsive-header-img" height="auto" width ="4%" src= {% static 'homepage/img/people.png'%} alt=""></h2>
+<h3>Already have an account? <a href="/accounts/login" class="register" data-toggle="modal" data-target=".forget-modal">Log In</a></h3>
+        <hr class="hr-text" data-content="SIGN UP WITH EMAIL">
+
+{% block body %}
+<form method="post">
+    {% csrf_token %}
+<div class="form-group">
+    <input placeholder="Username*" {{ form.username }}
+</div>
+<div class="form-group">
+    <input placeholder="Email*" {{ form.email }}
+</div>
+<div class="form-group">
+    <input placeholder="FirstName*" {{ form.first_name }}
+</div>
+<div class="form-group">
+    <input placeholder="LastName*" {{ form.last_name }}
+</div>
+<div class="form-group">
+    <input placeholder="Occupation*" {{ form.occupation }}
+</div>
+<div class="form-group">
+    <input placeholder="Password*" {{ form.password1 }}
+</div>
+<div class="form-group">
+    <input placeholder="Password Confirmation*" {{ form.password2 }}
+</div>
+    {% for field in form %}
+
+        {% if field.help_text %}
+          <small style="display: none">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+
+      {% endfor %}
+
+<button type = "submit">REGISTER</button>
+</form>
+{% endblock %}
+
+        <section class="contact-section bg-white">
+
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer">
+        *You agree to the Pusher Terms of Service and Privacy Policy.
+      </div>
+    </footer>
+    </div>
+
+</section>
+
+</body>
+</html>
+

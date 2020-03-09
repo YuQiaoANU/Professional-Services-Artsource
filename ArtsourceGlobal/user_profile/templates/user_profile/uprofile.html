@@ -1,0 +1,302 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>profile</title>
+<!-- Bootstrap core CSS -->
+<link href={% static 'user_profile/vendor/bootstrap/css/bootstrap.min.css'%} rel="stylesheet">
+
+<!--theme-->
+<link href={% static 'user_profile/css/main.css'%} rel="stylesheet">
+<link href={% static 'user_profile/css/style.css'%} rel="stylesheet">
+<link href={% static 'user_profile/css/grayscale.min.css'%} rel="stylesheet">
+<link href={% static 'user_profile/css/material-kit.css'%} rel="stylesheet">
+<script src={% static 'user_profile/vendor/jquery/jquery.min.js' %}></script>
+<script src={% static 'user_profile/js/uploadbtn.js' %}></script>
+<script src={% static 'user_profile/vendor/bootstrap/js/bootstrap.bundle.min.js' %}></script>
+
+
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+ <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+ <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons">
+</head>
+
+ <body class="profile-page">
+   <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+       <a class="navbar-brand js-scroll-trigger" href="#page-top"><img class="responsive-header-image" height="auto" width ="80%" src= {% static 'homepage/img/ASG_logo.png'%} alt="" href='/'></a>
+     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+     </button>
+
+     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+       <form class="form-inline">
+         <input class="form-control" type="search" placeholder="Search" id="search-input">
+       </form>
+     </div>
+       <div class="collapse navbar-collapse" id="navbarResponsive">
+       <ul class="navbar-nav ml-5">
+         <li class="nav-item active" id = "text-nav-opt">
+           <a class="nav-link js-scroll-trigger" href="/">Home <span class="sr-only">(current)</span></a>
+         </li>
+         <li class="nav-item" id = "text-nav-opt">
+           <a class="nav-link js-scroll-trigger" href="/#projects">Art</a>
+         </li>
+         <li class="nav-item" id = "text-nav-opt">
+           <a class="nav-link js-scroll-trigger" href="/gallery">Gallery</a>
+         </li>
+         <li class="nav-item" id = "text-nav-opt">
+           <a class="nav-link js-scroll-trigger" href="#">Support</a>
+         </li>
+         <li class="">
+                     <a href="/accounts/login" id ="header-signin" class="nav-link js-scroll-trigger"><button class="button-signin"> SIGN IN </button></a>
+                 </li>
+
+                 <li class="">
+                <a href="/signup" id ="header-signin" class="nav-link js-scroll-trigger"><button class="button-signup"> SIGN UP </button></a>
+                 </li>
+       </ul>
+     </div>
+   </nav>
+
+    <div class="page-header header-filter" data-parallax="true" style="background-image: -webkit-linear-gradient(0deg, orange 0%, red 100%);;"></div>
+    <div class="main main-raised">
+		<div class="profile-content">
+            <div class="container">
+                <div class="row">
+	                <div class="col-md-6 ml-auto mr-auto">
+        	           <div class="profile">
+	                        <div class="avatar">
+	                            <img src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTU0NjQzOTk4OTQ4OTkyMzQy/ansel-elgort-poses-for-a-portrait-during-the-baby-driver-premiere-2017-sxsw-conference-and-festivals-on-march-11-2017-in-austin-texas-photo-by-matt-winkelmeyer_getty-imagesfor-sxsw-square.jpg" alt="Circle Image" class="img-raised rounded-circle img-fluid">
+	                        </div>
+	                        <div class="name">
+	                            <h3 class="title">Christian Louboutin</h3>
+								<h6>Designer</h6>
+								<a href="#pablo" class="btn btn-just-icon btn-link btn-dribbble"><i class="fa fa-dribbble"></i></a>
+                                <a href="#pablo" class="btn btn-just-icon btn-link btn-twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="#pablo" class="btn btn-just-icon btn-link btn-pinterest"><i class="fa fa-pinterest"></i></a>
+	                        </div>
+	                    </div>
+    	            </div>
+                </div>
+                <div class="description text-center">
+                    <p>An artist of considerable range, Chet Faker — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. </p>
+                </div>
+				<div class="row">
+					<div class="col-md-6 ml-auto mr-auto">
+            <!--profile tabs-->
+            <div class="profile-tabs">
+                       <ul class="nav nav-pills nav-pills-icons justify-content-center" role="tablist">
+                         <li class="nav-item">
+                             <a class="nav-link active" href="#bookedart" role="tab" data-toggle="tab">
+                               <i class="material-icons">book</i>
+                               Art booked
+                             </a>
+                         </li>
+                         <li class="nav-item">
+                             <a class="nav-link" href="#upload" role="tab" data-toggle="tab">
+                               <i class="material-icons">palette</i>
+                                Upload new Art
+                             </a>
+                         </li>
+                         <li class="nav-item">
+                             <a class="nav-link" href="#favorite" role="tab" data-toggle="tab">
+                               <i class="material-icons">favorite</i>
+                                 Favorite
+                             </a>
+                         </li>
+                       </ul>
+                     </div>
+                     <div class="tab-content tab-space">
+
+           <div class="tab-pane active text-center gallery" id="bookedart">
+         <div class="row">
+           <div class="col-md-6 ml-auto mr-auto">
+             <div class="card_horizontal">
+     <div class="row ">
+       <div class="col-md-4">
+         <div id=imghori>
+             <img class=imagehori; src="http://placehold.it/1600x900" >
+        </div>
+         </div>
+         <div class="col-md-8 px-3">
+           <div class="card-block px-3">
+             <h4 class="card-title">Lorem ipsum dolor sit amet</h4>
+             <p class="card-text">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+             <p class="card-text">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+             <a href="#" class="btn btn-primary">Track</a>
+           </div>
+         </div>
+
+       </div>
+     </div>
+     <div class="card_horizontal">
+<div class="row ">
+<div class="col-md-4">
+  <div id=imghori>
+      <img class=imagehori; src="http://placehold.it/1600x900" >
+ </div>
+ </div>
+ <div class="col-md-8 px-3">
+   <div class="card-block px-3">
+     <h4 class="card-title">Lorem ipsum dolor sit amet</h4>
+     <p class="card-text">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+     <p class="card-text">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+     <a href="#" class="btn btn-primary">Track</a>
+   </div>
+ </div>
+
+</div>
+</div>
+<div class="card_horizontal">
+<div class="row ">
+<div class="col-md-4">
+  <div id=imghori>
+      <img class=imagehori; src="http://placehold.it/1600x900" >
+ </div>
+</div>
+<div class="col-md-8 px-3">
+<div class="card-block px-3">
+<h4 class="card-title">Lorem ipsum dolor sit amet</h4>
+<p class="card-text">Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+<p class="card-text">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<a href="#" class="btn btn-primary">Track</a>
+</div>
+</div>
+
+</div>
+</div>
+
+           </div>
+         </div>
+       </div>
+           <div class="tab-pane text-center gallery" id="upload">
+           <div class="row">
+             <div class="col-md-6 ml-auto mr-auto">
+               <div class="box">
+           <!-- fileuploader view component -->
+           <form action="#" method="post" class="text-center">
+             <div class="margin-bottom-20">
+               <img id='img-upload'/>
+             </div>
+
+           </form>
+           <!-- ./fileuploader view component -->
+           <div class="row">
+             <div class="col-sm-10">
+               <span class="control-fileupload">
+                 <div class="input-group">
+            <span class="input-group-btn">
+                <span class="upbtn upbtn-default btn-file">
+                    Browse… <input type="file" id="imgInp">
+                </span>
+            </span>
+            <input type="text" class="form-control" readonly>
+        </div>
+               </span>
+             </div>
+             <div class="col-sm-2">
+               <button type="button" class="btn btn-primary btn-block">
+                 <i class="icon-upload icon-white"></i> Upload
+               </button>
+             </div>
+           </div>
+         </div>
+            </div>
+           </div>
+       </div>
+           <div class="tab-pane text-center gallery" id="favorite">
+           <div class="row">
+             <div class="col-md-6 ml-auto mr-auto">
+               <div class="card-columns">
+
+
+                  <div class="card">
+                      <img class="card-img-top" src= {% static 'user_profile/img/card510.jpg'%} alt="Card image cap">
+                       <div class="card-body">
+                          <h5 class="card-title">Card title that wraps to a new line</h5>
+                          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                          </div>
+                  </div>
+                  <div class="card">
+                    <img class="card-img-top" src= {% static 'user_profile/img/card5250.jpg'%} alt="Card image cap">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+                 </div>
+   <div class="card">
+     <img class="card-img-top" src= {% static 'user_profile/img/card52502.jpg'%} alt="Card image cap">
+     <div class="card-body">
+       <h5 class="card-title">Card title</h5>
+       <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+       <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+     </div>
+   </div>
+   <div class="card ">
+     <img class="card-img" src= {% static 'user_profile/img/card55.jpg'%} alt="Card image">
+     <div class="card-body">
+       <h5 class="card-title">Card title</h5>
+       <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+       <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+     </div>
+   </div>
+   <div class="card ">
+     <img class="card-img" src= {% static 'user_profile/img/card51000.jpg'%} alt="Card image">
+     <div class="card-body">
+       <h5 class="card-title">Card title</h5>
+       <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+       <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+     </div>
+   </div>
+   <div class="card">
+     <img class="card-img" src= {% static 'user_profile/img/card56.jpg'%} alt="Card image">
+     <div class="card-body">
+       <h5 class="card-title">Card title</h5>
+       <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+       <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+     </div>
+   </div>
+   <div class="card ">
+     <img class="card-img" src= {% static 'user_profile/img/card58.jpg'%} alt="Card image">
+     <div class="card-body">
+       <h5 class="card-title">Card title</h5>
+       <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+       <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+     </div>
+   </div>
+   <div class="card">
+     <img class="card-img" src= {% static 'user_profile/img/card5300.jpg'%} alt="Card image">
+     <div class="card-body">
+       <h5 class="card-title">Card title</h5>
+       <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+       <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+     </div>
+   </div>
+   </div>
+          </div>
+           </div>
+         </div>
+         </div>
+    	    	</div>
+            </div>
+
+
+
+            </div>
+        </div>
+	</div>
+
+	<footer class="footer text-center ">
+    </footer>
+
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+
+ </body>
+</html>
