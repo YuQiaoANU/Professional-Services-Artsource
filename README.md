@@ -2,7 +2,7 @@
 
 # **Artsource Global- A TechLauncher Project**
 
-![logo](master/ASG_logo.png)
+<div align=center><img width="150" height="150" src="/ASG_logo.png"/></div>
 
 # **Overview**
 The Artsource Global enable people to rent art directly from local artists. Most art rental companies buy artwork, rent it out and keep all the money. A website has been built by a previous team. The layout, interaction logic, and related 
