@@ -1,14 +1,14 @@
 from django.db import models
-from signup.models import UserProfile
+from user.models import User
 from homepage.models import Artwork
 from django.contrib.auth.models import User
 from django.http import HttpResponse,HttpResponseRedirect
 from datetime import date
 #Create a Reservation Model which stores booking details
 class Reservation(models.Model):
-    booking_owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='bookingowner')
+    booking_owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bookingowner')
     art = models.ForeignKey(Artwork, on_delete=models.CASCADE, related_name='bookart')
-    artist = models.ForeignKey(UserProfile,on_delete=models.CASCADE, related_name='artist')
+    artist = models.ForeignKey(User,on_delete=models.CASCADE, related_name='artist')
     CheckIn = models.DateField()
     CheckOut = models.DateField()
     totalPrice = models.IntegerField(default = 0)

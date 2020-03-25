@@ -36,8 +36,10 @@ INSTALLED_APPS = [
     'gallery',
     'user_profile',
     'artworkpage',
-    'signup',
+    'user',
     'booking',
+    'captcha',
+    'terms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -146,7 +148,9 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "www", "static")
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 LOGIN_REDIRECT_URL = 'homeAfterLogin'
 LOGOUT_REDIRECT_URL = 'home'

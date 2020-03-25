@@ -9,7 +9,7 @@ from homepage.models import Artwork, Booking
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
-from signup.models import UserProfile
+from user.models import User
 from django.contrib.auth import update_session_auth_hash
 from django.views.generic import TemplateView
 from homepage.models import Artwork, Booking

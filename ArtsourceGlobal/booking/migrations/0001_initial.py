@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('homepage', '0001_initial'),
-        ('signup', '0004_auto_20181009_0836'),
+        ('user', '0004_auto_20181009_0836'),
     ]
 
     operations = [
@@ -22,8 +22,8 @@ class Migration(migrations.Migration):
                 ('CheckOut', models.DateField()),
                 ('totalPrice', models.IntegerField(default=0)),
                 ('art', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='bookart', to='homepage.Artwork')),
-                ('artist', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='artist', to='signup.UserProfile')),
-                ('booking_owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='bookingowner', to='signup.UserProfile')),
+                ('artist', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='artist', to='user.UserProfile')),
+                ('booking_owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='bookingowner', to='user.UserProfile')),
             ],
             options={
                 'verbose_name_plural': 'Reservation',

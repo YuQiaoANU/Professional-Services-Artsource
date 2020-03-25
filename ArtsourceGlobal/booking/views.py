@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.core.signing import Signer
 from django.http import HttpResponse,HttpResponseRedirect
 from django.db.models import Q
-from signup.models import UserProfile
+from user.models import User
 #from Authorize.models import UserRole
 #from ManageHotels.models import Photo
 from .models import Reservation

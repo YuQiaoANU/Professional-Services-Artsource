@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ 
+    {% extends 'base.html' %}
+    {% block title %}Main page{% endblock %}
+    {% block content %}
+        {% if request.session.is_login %}
+        <h1>hello，{{ request.session.user_name }} ! Welcome to back!</h1>
+        {% else %}
+        <h1> You are not log in, can only access the public information</h1>
+        {% endif %}
+    {% endblock %}
+ 
+ 
+</body>
+</html>
