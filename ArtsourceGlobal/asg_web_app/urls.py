@@ -18,7 +18,6 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
-
 from homepage import views
 from django.urls import path, include
 from django.views.generic.base import TemplateView
@@ -28,17 +27,16 @@ from django.conf.urls import url
 from user import views as core_views
 from homepage import views
 
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('artworkpage/',include('artworkpage.urls')),
+    path('artworkpage/', include('artworkpage.urls')),
     path('gallery/', include('gallery.urls')),
     path('user_profile/', include('user_profile.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', include(('booking.urls', 'booking'), namespace='booking')),
     path('homeafterlogin/', views.index, name='homeAfterLogin'),
     path('', include('homepage.urls')),
+    path('', include('user.urls')),
 
     path('user/', include('user.urls')),
     path('captcha', include('captcha.urls')),

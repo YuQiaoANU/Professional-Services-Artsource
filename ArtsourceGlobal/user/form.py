@@ -12,8 +12,8 @@ class UserForm(forms.Form):
 
 class RegisterForm(forms.Form):
     artist_choices = (
-        ('Yes', True),
-        ('No', False),
+        ('Yes', 'Yes'),
+        ('No', 'No'),
     )
 
     username = forms.CharField(max_length=128, label='username',

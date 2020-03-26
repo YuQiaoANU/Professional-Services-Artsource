@@ -1,0 +1,29 @@
+make sure you are on the same dir that contains manage.py
+create requirements.txt, put it in the same dir of manage.py
+pip3 maybe changed to pip
+pip3 freeze > requirements.txt
+
+if you just need the modules for this project rather than the virtual environment:
+pip3 install pipreqs
+pipreqs ./  #if show errors, use the bottom command
+pipreqs ./ --encoding=utf-8
+
+Install the required modules, if network is too slow, try to use other source:
+pip3 install -r requirements.txt
+
+you can run server by:
+python manage.py runserver
+
+create super user by:
+python manage.py createsuperuser
+
+check the backend by:
+the ip+/admin
+Notice: only the databse table recorded by admin.site can show in admin backend
+Which generally added in admin.py file:
+like the code: admin.site.register(models.User)
+
+
+
+
+

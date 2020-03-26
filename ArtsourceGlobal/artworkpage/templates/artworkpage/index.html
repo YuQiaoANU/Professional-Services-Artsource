@@ -62,7 +62,7 @@
       <li class="nav-item" id = "text-nav-opt">
         <a class="nav-link js-scroll-trigger" href="/email">Support</a>
       </li>
-        {% if user.is_authenticated %}
+        {% if request.session.is_login %}
       <li class="">
          <div class="" style="color: orangered; padding: 2.6rem 1.5rem;">
                   Hi ! {{ user.username }}
@@ -72,7 +72,7 @@
       </li>
             <li class="">
 
-                <a href="{% url 'logout' %}" class="logout" style="color: #002752; padding: 2.6rem 1.5rem; text-decoration: underline">logout</a>
+                <a href="/user/logout" class="logout" style="color: #002752; padding: 2.6rem 1.5rem; text-decoration: underline">logout</a>
 
             </li>
 

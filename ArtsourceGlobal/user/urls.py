@@ -1,14 +1,14 @@
+from django.conf.urls import url
 from django.urls import path, include
 from user import views
 from django.contrib import admin
 
-app_name = 'user'
 
 urlpatterns = [
-    path('admin', admin.site.urls),
     path('login/', views.login),
     path('index/', views.index),
     path('register/', views.register),
     path('logout/', views.logout),
-
+    url(r'^active/(?P<active_code>.*)/$', views.ActiveUserView.as_view(), name="user_active"),
+    # (?P<active_code# >.*)/$ extract the string and assign to active_code
 ]

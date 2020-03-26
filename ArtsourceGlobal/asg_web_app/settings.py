@@ -12,10 +12,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -27,7 +25,6 @@ SECRET_KEY = 'e3rl94#_#_k!0#syx&u8eja*vn##q^n=i#glcr))5o)ihs=4s^'
 DEBUG = True
 
 ALLOWED_HOSTS = ['asg-web-app-dev.ap-southeast-2.elasticbeanstalk.com', 'localhost', '127.0.0.1']
-
 
 # Application definition
 
@@ -79,7 +76,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'asg_web_app.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
@@ -99,16 +95,15 @@ if 'RDS_DB_NAME' in os.environ:
             'PASSWORD': os.environ['RDS_PASSWORD'],
             'HOST': os.environ['RDS_HOSTNAME'],
             'PORT': os.environ['RDS_PORT'],
-}
-}
+        }
+    }
 else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-}
-}
-
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -128,7 +123,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
@@ -142,7 +136,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
@@ -151,10 +144,19 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 LOGIN_REDIRECT_URL = 'homeAfterLogin'
 LOGOUT_REDIRECT_URL = 'home'
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# used for sending email
+EMAIL_HOST = "smtp.163.com"  # server
+EMAIL_PORT = 25  # port number
+EMAIL_HOST_USER = "15763036963@163.com"  # the account
+EMAIL_HOST_PASSWORD = "LKEDMORRPCOTHSSE"  # password: the password used for Authorization of sending email, not the
+# login
+EMAIL_USE_TLS = False  # use transport layer security or not
+EMAIL_FROM = "15763036963@163.com"  # which account send the email
+ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window; you may, of course, use a different value.

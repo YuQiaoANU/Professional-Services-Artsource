@@ -4,7 +4,7 @@ from booking.models import Reservation
 # Create your views here.
 def index(request):
     artworks = Artwork.objects.all()
-    return render(request, 'artworkpage/index.html', {{'artworks':artworks}})
+    return render(request, 'artworkpage/index.html')
     
 def booking_detail(request, pk):
    artid = Artwork.objects.get(id=pk)
