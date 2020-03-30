@@ -10,7 +10,12 @@
 {% load staticfiles %}
 {% block title %}Register{% endblock %}
 {% block css %}
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+    <link rel="stylesheet" href="{% static 'css/switch.css' %}" type="text/css">
+{% endblock %}
+{% block js %}
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/on_off_switch.js' %}"></script>
 {% endblock %}
 {% block content %}
 
@@ -24,49 +29,65 @@
                 {% csrf_token %}
 
                 <h2 class="text-center">Welcome register</h2>
-                <div class="form-group">
+                <div class="form-entry">
                     {{ register_form.username.label_tag }}
                     {{ register_form.username }}
                 </div>
 
-                <div class="form-group">
+                <div class="form-entry">
                     {{ register_form.password1.label_tag }}
                     {{ register_form.password1 }}
                 </div>
 
-                <div class="form-group">
+                <div class="form-entry">
                     {{ register_form.password2.label_tag }}
                     {{ register_form.password2 }}
                 </div>
 
-                <div class="form-group">
+                <div class="form-entry">
                     {{ register_form.email.label_tag }}
                     {{ register_form.email }}
                 </div>
 
-                <div class="form-group">
-                    {{ register_form.artist.label_tag }}
-                    {{ register_form.artist }}
+                <div class="testswitch">
+<!--                    {{ register_form.artist }}-->
+                    <input class="testswitch-checkbox" id="checkArtist" type="checkbox" name="artist">
+                    <label class="testswitch-label" for="checkArtist">
+                        <span class="testswitch-inner" data-on="Artist" data-off="Not artist"></span>
+                        <span class="testswitch-switch"></span>
+                    </label>
+
                 </div>
 
-<!--                <div class="form-group">-->
+                <menu id="refereeMenu" style="display: none;">
+                <li class="form-entry" name="realName" id="realName" >
+                    Your real name
+                    {{ register_form.realName }}
+                </li>
+                <li class="form-entry" name="refEmail" id="refEmail">
+                    Referee's email
+                    {{ register_form.refEmail }}
+                </li>
+                </menu>
+
+<!--                <div class="form-entry">-->
 <!--                    <input type="checkbox" value="1" name="check_box_list"/>Accept the terms-->
 <!--                    <input type="checkbox" value="2" name="check_box_list"/>2-->
 <!--                </div>-->
 
-                <div class="form-group">
+                <div class="form-entry" style="height: 20px">
                     <input type="checkbox" name="term_check"/>Accept the terms
                     <a href="/terms/terms1" >The terms details</a>
                 </div>
 
-                <div class="form-group">
+                <div class="form-entry">
                     {{ register_form.captcha.errors }}
                     {{ register_form.captcha.label_tag }}
                     {{ register_form.captcha }}
                 </div>
 
-                <button type="reset" class="btn btn-default pull-left">reset</button>
-                <button type="submit" class="btn btn-primary pull-right">submit</button>
+                <button type="reset" class="btn btn-default pull-left" style="margin-top: 10px;">reset</button>
+                <button type="submit" class="btn btn-primary pull-right" style="margin-top: 10px;">submit</button>
             </form>
         </div>
     </div> <!-- /container -->
@@ -74,3 +95,4 @@
 
 </body>
 </html>
+

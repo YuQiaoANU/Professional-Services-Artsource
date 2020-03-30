@@ -23,7 +23,10 @@ Notice: only the databse table recorded by admin.site can show in admin backend
 Which generally added in admin.py file:
 like the code: admin.site.register(models.User)
 
-
+For the email configuration, you need set the mail server 
+1. cd into the asg_web_app
+2. open the setting.py
+3. scroll down to the bottom then you can find the info you need
 
 
 

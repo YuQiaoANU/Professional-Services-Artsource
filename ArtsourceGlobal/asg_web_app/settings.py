@@ -141,12 +141,18 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, 'static/'),
+    # STATIC_ROOT,
+    # ("css", os.path.join(STATIC_ROOT, "static")),
+    # ("js", os.path.join(STATIC_ROOT, "js")),
 ]
+
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-LOGIN_REDIRECT_URL = 'homeAfterLogin'
-LOGOUT_REDIRECT_URL = 'home'
+# LOGIN_REDIRECT_URL = 'homeAfterLogin'
+# LOGOUT_REDIRECT_URL = 'home'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

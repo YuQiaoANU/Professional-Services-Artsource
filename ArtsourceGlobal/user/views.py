@@ -90,7 +90,6 @@ def register(request):
         #     print("the term function")  # i.e. add the term choice to db
         message = 'Please check the provided information'
         check_term = request.POST.get('term_check')  # another method to get check box, or can use form.cleaned_data
-
         if check_term == 'on':
             if register_form.is_valid():
                 # dont wanna fill form again
@@ -130,10 +129,12 @@ def register(request):
                     # use encrypted password
                     new_user.password = hash_code(password1)
                     new_user.email = email
-                    new_user.artist = artist_choices[artist]
+                    if artist == 'on':
+                        new_user.artist = True
+
                     new_user.is_active = False
-                    send_code_email(email, send_type="register")
-                    new_user.save()
+                    # send_code_email(email, send_type="register")
+                    # new_user.save()
                     return redirect('/user/login/')
     # if request is not valid, return a RegisterForm
     register_form = RegisterForm()
@@ -151,7 +152,6 @@ def logout(request):
     # del request.session['is_login']
     # del request.session['user_id']
     # del request.session['user_name']
-    print("helllllllllllllllllllllllll")
     return redirect('/user/index/')
 
 

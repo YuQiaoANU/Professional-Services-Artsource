@@ -11,17 +11,26 @@ class UserForm(forms.Form):
 
 
 class RegisterForm(forms.Form):
-    artist_choices = (
-        ('Yes', 'Yes'),
-        ('No', 'No'),
-    )
+    # artist_choices = (
+    #     ('Yes', 'Yes'),
+    #     ('No', 'No'),
+    # )
 
-    username = forms.CharField(max_length=128, label='username',
+    username = forms.CharField(max_length=128, label='Username',
                                widget=forms.TextInput(attrs={'class': 'form-control'}))
-    password1 = forms.CharField(max_length=256, label='password',
+    password1 = forms.CharField(max_length=256, label='Password',
                                 widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    password2 = forms.CharField(max_length=256, label='confirm password',
+    password2 = forms.CharField(max_length=256, label='Confirm password',
                                 widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    email = forms.EmailField(label='email', widget=forms.EmailInput(attrs={'class': 'form-control'}))
-    artist = forms.ChoiceField(choices=artist_choices, label='artist')
-    captcha = CaptchaField(label="captcha")
+    email = forms.EmailField(label='Email', widget=forms.EmailInput(attrs={'class': 'form-control'}))
+
+    realName = forms.CharField(max_length=128, label='Your real name',
+                               widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    # referee = forms.CharField(max_length=128, label='Referee\'s name',
+    #                           widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    refEmail = forms.EmailField(label='Referee\'s Email', widget=forms.EmailInput(attrs={'class': 'form-control'}))
+
+    # artist = forms.ChoiceField(choices=artist_choices, label='artist')
+    captcha = CaptchaField(label="Captcha")

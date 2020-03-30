@@ -12,6 +12,9 @@ class User(models.Model):
     artist = models.BooleanField(default=True)
     c_time = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=False)
+    # referee = models.CharField(max_length=256)
+    realName = models.CharField(max_length=256)
+    refEmail = models.EmailField(unique=True)
 
     def __str__(self):
         return self.username
