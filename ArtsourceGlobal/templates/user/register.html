@@ -50,7 +50,6 @@
                 </div>
 
                 <div class="testswitch">
-<!--                    {{ register_form.artist }}-->
                     <input class="testswitch-checkbox" id="checkArtist" type="checkbox" name="artist">
                     <label class="testswitch-label" for="checkArtist">
                         <span class="testswitch-inner" data-on="Artist" data-off="Not artist"></span>
@@ -69,6 +68,80 @@
                     {{ register_form.refEmail }}
                 </li>
                 </menu>
+
+                <div class="form-entry">
+                    <input id="addition_switch" type="checkbox" name="addition_switch" style="display: none">
+                    <label style="vertical-align:middle; color:deepskyblue;" for="addition_switch">Additional Information
+                    <span id="addition_arrow" class="arrow-bottom" ></span></label>
+                </div>
+
+                <div id="additionalInfo" style="display: none;">
+                    <div class="form-entry" style="margin-bottom: 10px;">
+                        {{ register_form.gender.label }}
+                        {{ register_form.gender }}
+                    </div>
+                    <div class="form-entry" style="margin-bottom: 10px;">
+                        {{ register_form.age.label }}
+                        {{ register_form.age }}
+                    </div>
+
+                    <div class="form-entry" style="margin-bottom: 10px;">
+                        {{ register_form.street1.label }}
+                        {{ register_form.street1 }}
+                    </div>
+                    <div class="form-entry" style="margin-bottom: 10px;">
+                        {{ register_form.street2.label }}
+                        {{ register_form.street2 }}
+                    </div>
+                    <div class="form-entry" style="margin-bottom: 10px;">
+                        {{ register_form.suburb.label }}
+                        {{ register_form.suburb }}
+                    </div>
+
+                    <div class="form-entry" style="margin-bottom: 10px;">
+                        {{ register_form.state.label }}
+                        {{ register_form.state }}
+                    </div>
+                    <div class="form-entry" style="margin-bottom: 10px;">
+                        {{ register_form.postalCode.label }}
+                        {{ register_form.postalCode }}
+                    </div>
+                    <div class="form-entry" style="margin-bottom: 10px;">
+                        {{ register_form.country.label }}
+                        {{ register_form.country }}
+                    </div>
+
+                    <div class="form-entry" style="margin-bottom: 10px;">
+                        {{ register_form.phone.label }}
+                        {{ register_form.phone }}
+                    </div>
+
+                </div>
+
+                <div class="form-entry">
+                    <input id="interest_switch" type="checkbox" name="interest_switch" style="display: none">
+                    <label style="vertical-align:middle; color:deepskyblue;" for="interest_switch">Interest choices
+                    <span id="interest_arrow" class="arrow-bottom" ></span></label>
+                </div>
+
+                <div id="interest" style="display: none;">
+                    <span><label style="vertical-align:middle;"><input type="checkbox" name="painting" class="form-interest"/>
+                    Painting</label></span>
+                    <span><label style="vertical-align:middle;"><input type="checkbox" name="sculpture" class="form-interest"/>
+                    Sculpture</label></span>
+                    <span><label style="vertical-align:middle;"><input type="checkbox" name="photography" class="form-interest"/>
+                    Photography</label></span>
+                    <span><label style="vertical-align:middle;"><input type="checkbox" name="calligraphy" class="form-interest"/>
+                    Calligraphy</label></span>
+                    <span><label style="vertical-align:middle;"><input type="checkbox" name="printmaking" class="form-interest"/>
+                    Printmaking</label></span>
+                    <span><label style="vertical-align:middle;"><input type="checkbox" name="artsAndCrafts" class="form-interest"/>
+                    Arts And Crafts</label></span>
+                    <span><label style="vertical-align:middle;"><input type="checkbox" name="sealCutting" class="form-interest"/>
+                    Seal Cutting</label></span>
+                    <span><label style="vertical-align:middle;"><input type="checkbox" name="artDesign" class="form-interest"/>
+                    Art Design</label></span>
+                </div>
 
 <!--                <div class="form-entry">-->
 <!--                    <input type="checkbox" value="1" name="check_box_list"/>Accept the terms-->

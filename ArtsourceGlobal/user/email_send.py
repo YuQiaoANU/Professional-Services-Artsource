@@ -23,8 +23,11 @@ def random_str(length=8):
 
 
 # send email that verify user by system
-def send_code_email(email, send_type="register"):
+def send_code_email(email, referee_email, send_type="register", real_name='', is_artist=False):
     """
+    :param is_artist: check the register is for artist or not
+    :param referee_email: the email of referee's email
+    :param real_name: the real name of user when verify as artist
     :param email: the email address used for sending email
     :param send_type: retrieve or verification
     :return: True/False
@@ -38,13 +41,21 @@ def send_code_email(email, send_type="register"):
     email_record.send_time = datetime.datetime.now()
     email_record.save()
 
-    email_title = ""
-    email_body = ""
-
     if send_type == "register":
-        email_title = "register verification"
-        email_body = "use the blow link to activate your account: http://127.0.0.1:8000/active/{0}".format(code)
-        send_status = send_mail(email_title, email_body, settings.EMAIL_FROM, [email])
+        if is_artist:
+            if referee_email == '':
+                # this need to be changed later, works as the admin email address for verification
+                referee_email = 'eeyzs1@zoho.com'
+            email_title = "register verification for " + real_name
+            email_body = "Register email is {registered_email}, use the blow link to activate {artist}'s " \
+                         "account: http://127.0.0.1:8000/active/{random_code}".format(random_code=code,
+                                                                                      artist=real_name,
+                                                                                      registered_email=email)
+            send_status = send_mail(email_title, email_body, settings.EMAIL_FROM, [referee_email])
+        else:
+            email_title = "register verification"
+            email_body = "use the blow link to activate your account: http://127.0.0.1:8000/active/{0}".format(code)
+            send_status = send_mail(email_title, email_body, settings.EMAIL_FROM, [email])
         if not send_status:
             return False
     if send_type == "retrieve":

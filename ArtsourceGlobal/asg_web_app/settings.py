@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'booking',
     'captcha',
     'terms',
+    'django_countries',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

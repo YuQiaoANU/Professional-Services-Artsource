@@ -12,3 +12,48 @@
   margin-left: 0px;
   /*margin: 0 auto;*/
 }
+
+.form-interest {
+  vertical-align:middle;
+  margin-top: -2px;
+  margin-bottom: 1px;
+  max-width: 16px;
+  position: relative;
+  max-height:16px;
+  padding: 5px;
+  margin-left: 10px;
+  font-size: 24px;
+  /*margin: 0 auto;*/
+}
+
+/*target top*/
+.arrow-top {
+  vertical-align:middle;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 7px solid #217AFF;
+  font-size: 0;
+  line-height: 0;
+}
+
+/*target bottom */
+.arrow-bottom {
+  vertical-align:middle;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 7px solid #217AFF;
+  font-size: 0;
+  line-height: 0;
+}
+
+
+
+
+
+
+
+
