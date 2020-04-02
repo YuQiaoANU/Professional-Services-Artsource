@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<title>Profile</title>
+</head>
+<body>
+
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Profile{% endblock %}
+{% block css %}
+<!--    <link rel="stylesheet" href="{% static 'css/login.css' %}">-->
+{% endblock %}
+
+
+{% block content %}
+<div class="container" >
+    <div id="block-position">
+        <div class="profile-tabs">
+           <ul class="nav nav-pills nav-pills-icons justify-content-center" role="tablist">
+             <li class="nav-item">
+                 <a class="nav-link" href="#bookedart" role="tab" data-toggle="tab">
+                   <i class="material-icons">book</i>
+                   Art booked
+                 </a>
+             </li>
+             <li class="nav-item">
+                 <a class="nav-link" href="#upload" role="tab" data-toggle="tab">
+                   <i class="material-icons">palette</i>
+                    Upload new Art
+                 </a>
+             </li>
+             <li class="nav-item">
+                 <a class="nav-link" href="#favorite" role="tab" data-toggle="tab">
+                   <i class="material-icons">favorite</i>
+                     Favorite
+                 </a>
+             </li>
+             <li class="nav-item">
+                 <a class="nav-link" href="/user/editProfile" role="tab" data-toggle="tab">
+                   <i class="material-icons">favorite</i>
+                     Edit profile
+                 </a>
+             </li>
+           </ul>
+         </div>
+    </div>
+
+</div>
+{% endblock %}
+</body>
+</html>

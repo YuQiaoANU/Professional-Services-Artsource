@@ -23,7 +23,7 @@ def random_str(length=8):
 
 
 # send email that verify user by system
-def send_code_email(email, referee_email, send_type="register", real_name='', is_artist=False):
+def send_code_email(email, referee_email='eeyzs1@zoho.com', send_type="register", real_name='', is_artist=False):
     """
     :param is_artist: check the register is for artist or not
     :param referee_email: the email of referee's email
@@ -43,9 +43,6 @@ def send_code_email(email, referee_email, send_type="register", real_name='', is
 
     if send_type == "register":
         if is_artist:
-            if referee_email == '':
-                # this need to be changed later, works as the admin email address for verification
-                referee_email = 'eeyzs1@zoho.com'
             email_title = "register verification for " + real_name
             email_body = "Register email is {registered_email}, use the blow link to activate {artist}'s " \
                          "account: http://127.0.0.1:8000/active/{random_code}".format(random_code=code,

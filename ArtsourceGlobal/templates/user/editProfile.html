@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Register{% endblock %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">
+{% endblock %}
+{% block js %}
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+{% endblock %}
+{% block content %}
+
+    <div class="container">
+        <div id="block-position">
+            <form class="form-register" action="/user/register/" method="post">
+                {% if message %}
+                    <div class="alert alert-warning">{{ message }}</div>
+                {% endif %}
+
+                {% csrf_token %}
+
+                <h2 class="text-center">Welcome register</h2>
+                <div class="form-entry">
+                    {{ profile_form.username.label_tag }}
+                    {{ profile_form.username }}
+                </div>
+
+                <div id="additionalInfo" style="display: block;">
+                    <div class="form-entry" style="margin-bottom: 10px;">
+                        {{ profile_form.gender.label }}
+                        {{ profile_form.gender }}
+                    </div>
+                    <div class="form-entry" style="margin-bottom: 10px;">
+                        {{ profile_form.age.label }}
+                        {{ profile_form.age }}
+                    </div>
+
+                    <div class="form-entry" style="margin-bottom: 10px;">
+                        {{ profile_form.street1.label }}
+                        {{ profile_form.street1 }}
+                    </div>
+                    <div class="form-entry" style="margin-bottom: 10px;">
+                        {{ profile_form.street2.label }}
+                        {{ profile_form.street2 }}
+                    </div>
+                    <div class="form-entry" style="margin-bottom: 10px;">
+                        {{ profile_form.suburb.label }}
+                        {{ profile_form.suburb }}
+                    </div>
+
+                    <div class="form-entry" style="margin-bottom: 10px;">
+                        {{ profile_form.state.label }}
+                        {{ profile_form.state }}
+                    </div>
+                    <div class="form-entry" style="margin-bottom: 10px;">
+                        {{ profile_form.postalCode.label }}
+                        {{ profile_form.postalCode }}
+                    </div>
+                    <div class="form-entry" style="margin-bottom: 10px;">
+                        {{ profile_form.country.label }}
+                        {{ profile_form.country }}
+                    </div>
+
+                    <div class="form-entry" style="margin-bottom: 10px;">
+                        {{ profile_form.phone.label }}
+                        {{ profile_form.phone }}
+                    </div>
+
+                </div>
+
+                <div id="interest" style="display: block;">
+                    <span><label style="vertical-align:middle;"><input type="checkbox" name="painting" class="form-interest"/>
+                    Painting</label></span>
+                    <span><label style="vertical-align:middle;"><input type="checkbox" name="sculpture" class="form-interest"/>
+                    Sculpture</label></span>
+                    <span><label style="vertical-align:middle;"><input type="checkbox" name="photography" class="form-interest"/>
+                    Photography</label></span>
+                    <span><label style="vertical-align:middle;"><input type="checkbox" name="calligraphy" class="form-interest"/>
+                    Calligraphy</label></span>
+                    <span><label style="vertical-align:middle;"><input type="checkbox" name="printmaking" class="form-interest"/>
+                    Printmaking</label></span>
+                    <span><label style="vertical-align:middle;"><input type="checkbox" name="artsAndCrafts" class="form-interest"/>
+                    Arts And Crafts</label></span>
+                    <span><label style="vertical-align:middle;"><input type="checkbox" name="sealCutting" class="form-interest"/>
+                    Seal Cutting</label></span>
+                    <span><label style="vertical-align:middle;"><input type="checkbox" name="artDesign" class="form-interest"/>
+                    Art Design</label></span>
+                </div>
+
+                <button type="reset" class="btn btn-default pull-left" style="margin-top: 10px;">reset</button>
+                <button type="submit" class="btn btn-primary pull-right" style="margin-top: 10px;">submit</button>
+            </form>
+        </div>
+    </div> <!-- /container -->
+{% endblock %}
+
+</body>
+</html>
+

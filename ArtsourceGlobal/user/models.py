@@ -6,26 +6,39 @@ from django_countries.fields import CountryField
 
 class Interest(models.Model):
     # Painting, sculpture, photography, calligraphy, printmaking, arts and crafts, seal cutting, art design
-    painting = models.BooleanField(default=True)
-    sculpture = models.BooleanField(default=True)
-    photography = models.BooleanField(default=True)
-    calligraphy = models.BooleanField(default=True)
-    printmaking = models.BooleanField(default=True)
-    artsAndCrafts = models.BooleanField(default=True)
-    sealCutting = models.BooleanField(default=True)
-    artDesign = models.BooleanField(default=True)
+    painting = models.BooleanField(default=False)
+    sculpture = models.BooleanField(default=False)
+    photography = models.BooleanField(default=False)
+    calligraphy = models.BooleanField(default=False)
+    printmaking = models.BooleanField(default=False)
+    artsAndCrafts = models.BooleanField(default=False)
+    sealCutting = models.BooleanField(default=False)
+    artDesign = models.BooleanField(default=False)
+    objects = models.Manager()
+
+    def __str__(self):
+        return 'interest'
 
 
 class AdditionalInfo(models.Model):
     gender = models.CharField(max_length=8, blank=True)
-    age = models.IntegerField(blank=True)
+    age = models.IntegerField(null=True)
     street1 = models.CharField(max_length=512, blank=True)
     street2 = models.CharField(max_length=512, blank=True)
     suburb = models.CharField(max_length=128, blank=True)
     state = models.CharField(max_length=128, blank=True)
     postalCode = models.CharField(max_length=128, blank=True)
-    country = CountryField(blank_label='Australia')
+    country = CountryField(blank_label='Australia', default='AU')
     phone = models.CharField(max_length=24, blank=True)
+    objects = models.Manager()
+
+    def __str__(self):
+        return 'additional info'
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = 'AdditionalInfo'
+        verbose_name_plural = 'AdditionalInfo'
 
 
 class User(models.Model):
@@ -40,8 +53,9 @@ class User(models.Model):
     # referee = models.CharField(max_length=256)
     # realName = models.CharField(max_length=256)
     refEmail = models.EmailField(unique=True, null=True)
-    interest = models.OneToOneField(Interest, on_delete=models.CASCADE)
-    additionalInfo = models.OneToOneField(AdditionalInfo, on_delete=models.CASCADE)
+    interest = models.OneToOneField(Interest, on_delete=models.CASCADE, null=True)
+    additionalInfo = models.OneToOneField(AdditionalInfo, on_delete=models.CASCADE, null=True)
+    objects = models.Manager()
 
     def __str__(self):
         return self.username

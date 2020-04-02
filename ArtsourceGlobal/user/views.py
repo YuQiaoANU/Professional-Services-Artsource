@@ -5,7 +5,7 @@ from django.views import View
 
 from user import models
 from .email_send import send_code_email
-from .form import UserForm, RegisterForm
+from .form import UserForm, RegisterForm, ProfileForm
 import hashlib
 
 from .models import EmailVerifyRecord
@@ -92,11 +92,10 @@ def register(request):
         check_term = request.POST.get('term_check')  # another method to get check box, or can use form.cleaned_data
 
         if check_term == 'on':
+            stored_form = register_form
             if register_form.is_valid():
                 # dont wanna fill form again
                 # username = register_form.cleaned_data['username']
-
-                stored_form = register_form
                 register_form.clean()
                 username = request.POST.get('username')
                 password1 = request.POST.get('password1')
@@ -135,40 +134,41 @@ def register(request):
                     # use encrypted password
                     new_user.password = hash_code(password1)
                     new_user.email = email
+                    new_user.is_active = False
                     # record additional info
                     additional_info = request.POST.get('additionalInfo')
                     street1 = request.POST.get('street1')
-                    new_user.additionalInfo = models.AdditionalInfo()
+                    additionalInfo = models.AdditionalInfo()
+                    additionalInfo.gender = request.POST.get('gender')
                     if additional_info == 'on' or street1 != '':  # they may fill the form and close the tab
-                        new_user.additionalInfo.gender = request.POST.get('gender')
-                        new_user.additionalInfo.age = int(request.POST.get('age'))
-                        new_user.additionalInfo.street1 = street1
-                        new_user.additionalInfo.street2 = request.POST.get('street2')
-                        new_user.additionalInfo.suburb = request.POST.get('suburb')
-                        new_user.additionalInfo.state = request.POST.get('state')
-                        new_user.additionalInfo.postalCode = request.POST.get('postalCode')
-                        new_user.additionalInfo.country = request.POST.get('country')
-                        new_user.additionalInfo.phone = request.POST.get('phone')
+                        additionalInfo.age = int(request.POST.get('age'))
+                        additionalInfo.street1 = street1
+                        additionalInfo.street2 = request.POST.get('street2')
+                        additionalInfo.suburb = request.POST.get('suburb')
+                        additionalInfo.state = request.POST.get('state')
+                        additionalInfo.postalCode = request.POST.get('postalCode')
+                        additionalInfo.country = request.POST.get('country')
+                        additionalInfo.phone = request.POST.get('phone')
 
                     # record interest
-                    new_user.interest = models.Interest()
+                    interest = models.Interest()
                     if request.POST.get('painting') == 'on':
-                        new_user.interest.painting = True
+                        interest.painting = True
                     if request.POST.get('sculpture') == 'on':
-                        new_user.interest.sculpture = True
+                        interest.sculpture = True
                     if request.POST.get('photography') == 'on':
-                        new_user.interest.photography = True
+                        interest.photography = True
                     if request.POST.get('calligraphy') == 'on':
-                        new_user.interest.calligraphy = True
+                        interest.calligraphy = True
                     if request.POST.get('printmaking') == 'on':
-                        new_user.interest.printmaking = True
+                        interest.printmaking = True
                     if request.POST.get('artsAndCrafts') == 'on':
-                        new_user.interest.artsAndCrafts = True
+                        interest.artsAndCrafts = True
                     if request.POST.get('sealCutting') == 'on':
-                        new_user.interest.sealCutting = True
+                        interest.sealCutting = True
                     if request.POST.get('artDesign') == 'on':
-                        new_user.interest.artDesign = True
-                    new_user.is_active = False
+                        interest.artDesign = True
+
                     if artist == 'on':
                         new_user.artist = True
                         ref_email = request.POST.get('refEmail')
@@ -178,10 +178,18 @@ def register(request):
                                         real_name=real_name, is_artist=True)
                     else:
                         send_code_email(email, send_type="register")
+                    try:
+                        additionalInfo.save()
+                        interest.save()
+                        new_user.interest = interest
+                        new_user.additionalInfo = additionalInfo
                         new_user.save()
-                        new_user.additionalInfo.save()
-                        new_user.interest.save()
+                    except Exception as e:
+                        print(e)
+
                     return redirect('/user/login/')
+            message = 'Please check the provided information such as Captcha'
+            return render(request, 'user/register.html', {'message': message, 'register_form': stored_form})
     # if request is not valid, return a RegisterForm
     register_form = RegisterForm()
 
@@ -208,3 +216,36 @@ def hash_code(s, salt='artsource'):
     # update only accept bytes
     h.update(s.encode())
     return h.hexdigest()
+
+
+def profile(request):
+    return render(request, 'user/profile.html')
+
+
+def edit_profile(request):
+    current_user_name = request.session.get('user_name')
+    user = models.User.objects.get(username=current_user_name)
+
+    print(user.username)
+    print(user.additionalInfo)
+    print(user.interest)
+
+    if user.additionalInfo is None:
+        print('shit')
+
+    if request == 'POST':
+        # record user's modification
+
+        return redirect('/user/profile/')
+    else:
+        profile_form = ProfileForm()
+        profile_form.username = user.username
+        profile_form.age = user.additionalInfo.age
+        profile_form.gender = user.additionalInfo.gender
+        profile_form.street1 = user.additionalInfo.street1
+        profile_form.street2 = user.additionalInfo.street2
+        profile_form.state = user.additionalInfo.state
+        profile_form.suburb = user.additionalInfo.suburb
+        profile_form.phone = user.additionalInfo.phone
+
+        return render(request, 'user/editProfile.html', { 'profile_form': profile_form})

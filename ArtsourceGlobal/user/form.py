@@ -4,6 +4,11 @@ from django_countries.widgets import CountrySelectWidget
 from django_countries.fields import LazyTypedChoiceField
 from django_countries import countries
 
+gender_choices = (
+    ('Male', 'Male'),
+    ('Female', 'Female'),
+)
+
 
 class UserForm(forms.Form):
     username = forms.CharField(label='username', max_length=128,
@@ -14,10 +19,6 @@ class UserForm(forms.Form):
 
 
 class RegisterForm(forms.Form):
-    gender_choices = (
-        ('Male', 'Male'),
-        ('Female', 'Female'),
-    )
 
     username = forms.CharField(max_length=128, label='Username',
                                widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -44,5 +45,25 @@ class RegisterForm(forms.Form):
     suburb = forms.CharField(max_length=128, label='Suburb', required=False)
     state = forms.CharField(max_length=128, label='State', required=False)
     postalCode = forms.CharField(max_length=128, label='Postal Code', required=False)
-
     phone = forms.CharField(max_length=24, label='Phone number', required=False)
+
+
+class ProfileForm(forms.Form):
+
+    username = forms.CharField(max_length=128, label='Username',
+                               widget=forms.TextInput(attrs={'class': 'form-control'}))
+    country = LazyTypedChoiceField(choices=countries, label='Country', required=False)
+    gender = forms.ChoiceField(choices=gender_choices, label='Gender', required=False)
+    age = forms.IntegerField(max_value=150, min_value=0, label='Age', required=False)
+    street1 = forms.CharField(max_length=512, label='Street1', required=False)
+    street2 = forms.CharField(max_length=512, label='Street2', required=False)
+    suburb = forms.CharField(max_length=128, label='Suburb', required=False)
+    state = forms.CharField(max_length=128, label='State', required=False)
+    postalCode = forms.CharField(max_length=128, label='Postal Code', required=False)
+    phone = forms.CharField(max_length=24, label='Phone number', required=False)
+
+
+
+
+
+
