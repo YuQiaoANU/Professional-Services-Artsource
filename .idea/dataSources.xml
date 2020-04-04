@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="db" uuid="e95b9c43-44ed-438f-83f8-8c9048333265">
+    <data-source source="LOCAL" name="db" uuid="62228c77-1551-4da0-8498-a6209fe7e5b6">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:F:\ANU\2020-s2\COMP8715 - Software Engineering Project\project\Artsource-global-master\ArtsourceGlobal\db.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:sqlite:F:\ANU\2020-s1\COMP8715 - Software Engineering Project\project\Artsource-global-master\ArtsourceGlobal\db.sqlite3</jdbc-url>
       <libraries>
         <library>
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/Xerial SQLiteJDBC/3.25.1/license.txt</url>

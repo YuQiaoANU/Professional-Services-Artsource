@@ -19,7 +19,6 @@ class UserForm(forms.Form):
 
 
 class RegisterForm(forms.Form):
-
     username = forms.CharField(max_length=128, label='Username',
                                widget=forms.TextInput(attrs={'class': 'form-control'}))
     password1 = forms.CharField(max_length=256, label='Password',
@@ -49,7 +48,6 @@ class RegisterForm(forms.Form):
 
 
 class ProfileForm(forms.Form):
-
     username = forms.CharField(max_length=128, label='Username',
                                widget=forms.TextInput(attrs={'class': 'form-control'}))
     country = LazyTypedChoiceField(choices=countries, label='Country', required=False)
@@ -62,8 +60,19 @@ class ProfileForm(forms.Form):
     postalCode = forms.CharField(max_length=128, label='Postal Code', required=False)
     phone = forms.CharField(max_length=24, label='Phone number', required=False)
 
-
-
-
-
-
+    painting = forms.BooleanField(label='painting', required=False,
+                                  widget=forms.CheckboxInput(attrs={'class': 'form-interest'}))
+    sculpture = forms.BooleanField(label='sculpture', required=False,
+                                   widget=forms.CheckboxInput(attrs={'class': 'form-interest'}))
+    photography = forms.BooleanField(label='photography', required=False,
+                                     widget=forms.CheckboxInput(attrs={'class': 'form-interest'}))
+    calligraphy = forms.BooleanField(label='calligraphy', required=False,
+                                     widget=forms.CheckboxInput(attrs={'class': 'form-interest'}))
+    printmaking = forms.BooleanField(label='printmaking', required=False,
+                                     widget=forms.CheckboxInput(attrs={'class': 'form-interest'}))
+    art_and_craft = forms.BooleanField(label='art_and_craft', required=False,
+                                       widget=forms.CheckboxInput(attrs={'class': 'form-interest'}))
+    seal_cutting = forms.BooleanField(label='seal_cutting', required=False,
+                                      widget=forms.CheckboxInput(attrs={'class': 'form-interest'}))
+    art_design = forms.BooleanField(label='art_design', required=False,
+                                    widget=forms.CheckboxInput(attrs={'class': 'form-interest'}))

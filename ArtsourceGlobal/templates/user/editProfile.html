@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Edit profile</title>
 </head>
 <body>
 
@@ -19,14 +19,14 @@
 
     <div class="container">
         <div id="block-position">
-            <form class="form-register" action="/user/register/" method="post">
+            <form class="form-register" action="/user/editProfile/" method="post">
                 {% if message %}
                     <div class="alert alert-warning">{{ message }}</div>
                 {% endif %}
 
                 {% csrf_token %}
 
-                <h2 class="text-center">Welcome register</h2>
+                <h2 class="text-center">Edit Profile</h2>
                 <div class="form-entry">
                     {{ profile_form.username.label_tag }}
                     {{ profile_form.username }}
@@ -72,26 +72,25 @@
                         {{ profile_form.phone.label }}
                         {{ profile_form.phone }}
                     </div>
-
                 </div>
 
                 <div id="interest" style="display: block;">
-                    <span><label style="vertical-align:middle;"><input type="checkbox" name="painting" class="form-interest"/>
-                    Painting</label></span>
-                    <span><label style="vertical-align:middle;"><input type="checkbox" name="sculpture" class="form-interest"/>
-                    Sculpture</label></span>
-                    <span><label style="vertical-align:middle;"><input type="checkbox" name="photography" class="form-interest"/>
-                    Photography</label></span>
-                    <span><label style="vertical-align:middle;"><input type="checkbox" name="calligraphy" class="form-interest"/>
-                    Calligraphy</label></span>
-                    <span><label style="vertical-align:middle;"><input type="checkbox" name="printmaking" class="form-interest"/>
-                    Printmaking</label></span>
-                    <span><label style="vertical-align:middle;"><input type="checkbox" name="artsAndCrafts" class="form-interest"/>
-                    Arts And Crafts</label></span>
-                    <span><label style="vertical-align:middle;"><input type="checkbox" name="sealCutting" class="form-interest"/>
-                    Seal Cutting</label></span>
-                    <span><label style="vertical-align:middle;"><input type="checkbox" name="artDesign" class="form-interest"/>
-                    Art Design</label></span>
+                    <span class="form-entry" style="margin-bottom: 10px;">
+                    <label style="vertical-align:middle;">{{ profile_form.painting }}Painting</label></span>
+                    <span class="form-entry" style="margin-bottom: 10px;">
+                    <label style="vertical-align:middle;">{{ profile_form.sculpture }}Sculpture</label></span>
+                    <span class="form-entry" style="margin-bottom: 10px;">
+                    <label style="vertical-align:middle;">{{ profile_form.photography }}Photography</label></span>
+                    <span class="form-entry" style="margin-bottom: 10px;">
+                    <label style="vertical-align:middle;">{{ profile_form.calligraphy }}Calligraphy</label></span>
+                    <span class="form-entry" style="margin-bottom: 10px;">
+                    <label style="vertical-align:middle;">{{ profile_form.printmaking }}Printmaking</label></span>
+                    <span class="form-entry" style="margin-bottom: 10px;">
+                    <label style="vertical-align:middle;">{{ profile_form.art_and_craft }}Arts And Crafts</label></span>
+                    <span class="form-entry" style="margin-bottom: 10px;">
+                    <label style="vertical-align:middle;">{{ profile_form.seal_cutting }}Seal Cutting</label></span>
+                    <span class="form-entry" style="margin-bottom: 10px;">
+                    <label style="vertical-align:middle;">{{ profile_form.art_design }}Art Design</label></span>
                 </div>
 
                 <button type="reset" class="btn btn-default pull-left" style="margin-top: 10px;">reset</button>

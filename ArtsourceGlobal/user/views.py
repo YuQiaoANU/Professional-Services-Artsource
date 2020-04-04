@@ -223,29 +223,68 @@ def profile(request):
 
 
 def edit_profile(request):
+    # check select_related latter
     current_user_name = request.session.get('user_name')
     user = models.User.objects.get(username=current_user_name)
-
-    print(user.username)
-    print(user.additionalInfo)
-    print(user.interest)
-
-    if user.additionalInfo is None:
-        print('shit')
-
-    if request == 'POST':
+    additionalInfo = user.additionalInfo
+    interest = user.interest
+    message = ''
+    if request.method == 'POST':
         # record user's modification
+        profile_form = ProfileForm(request.POST)
+        if profile_form.is_valid():
+            new_user_name = profile_form.cleaned_data['username']
+            if new_user_name != user.username:
+                same_user_name = models.User.objects.filter(username=new_user_name)
+                if same_user_name:
+                    message = 'The user name was already existed'
+                    profile_form.username = user.username
+                    return render(request, 'user/editProfile.html', {'message': message, 'profile_form': profile_form})
+                user.username = new_user_name
+                user.save()
+                request.session['user_name'] = user.username
+            additionalInfo.gender = profile_form.cleaned_data['gender']
+            additionalInfo.age = profile_form.cleaned_data['age']
+            additionalInfo.street1 = profile_form.cleaned_data['street1']
+            additionalInfo.street2 = profile_form.cleaned_data['street2']
+            additionalInfo.state = profile_form.cleaned_data['state']
+            additionalInfo.suburb = profile_form.cleaned_data['suburb']
+            additionalInfo.postalCode = profile_form.cleaned_data['postalCode']
+            additionalInfo.country = profile_form.cleaned_data['country']
+            additionalInfo.phone = profile_form.cleaned_data['phone']
+            additionalInfo.save()
+            interest.painting = profile_form.cleaned_data['painting']
+            interest.sculpture = profile_form.cleaned_data['sculpture']
+            interest.photography = profile_form.cleaned_data['photography']
+            interest.calligraphy = profile_form.cleaned_data['calligraphy']
+            interest.printmaking = profile_form.cleaned_data['printmaking']
+            interest.artsAndCrafts = profile_form.cleaned_data['art_and_craft']
+            interest.sealCutting = profile_form.cleaned_data['seal_cutting']
+            interest.artDesign = profile_form.cleaned_data['art_design']
+            interest.save()
 
-        return redirect('/user/profile/')
-    else:
-        profile_form = ProfileForm()
-        profile_form.username = user.username
-        profile_form.age = user.additionalInfo.age
-        profile_form.gender = user.additionalInfo.gender
-        profile_form.street1 = user.additionalInfo.street1
-        profile_form.street2 = user.additionalInfo.street2
-        profile_form.state = user.additionalInfo.state
-        profile_form.suburb = user.additionalInfo.suburb
-        profile_form.phone = user.additionalInfo.phone
+            return redirect('/user/profile/')
+        message = 'The form is invalid'
 
-        return render(request, 'user/editProfile.html', { 'profile_form': profile_form})
+    profile_form = ProfileForm(initial={
+        'username': user.username,
+        'age': additionalInfo.age,
+        'gender': additionalInfo.gender,
+        'street1': additionalInfo.street1,
+        'street2': additionalInfo.street2,
+        'state': additionalInfo.state,
+        'suburb': additionalInfo.suburb,
+        'postalCode': additionalInfo.postalCode,
+        'country': additionalInfo.country,
+        'phone': additionalInfo.phone,
+        'painting': interest.painting,
+        'sculpture': interest.sculpture,
+        'photography': interest.photography,
+        'calligraphy': interest.calligraphy,
+        'printmaking': interest.printmaking,
+        'art_and_craft': interest.artsAndCrafts,
+        'seal_cutting': interest.sealCutting,
+        'art_design': interest.artDesign,
+    })
+
+    return render(request, 'user/editProfile.html', {'message': message, 'profile_form': profile_form})
