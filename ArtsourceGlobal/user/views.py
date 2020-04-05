@@ -5,15 +5,10 @@ from django.views import View
 
 from user import models
 from .email_send import send_code_email
-from .form import UserForm, RegisterForm, ProfileForm
+from .form import UserForm, RegisterForm, ProfileForm, ResetForm, RetrieveForm
 import hashlib
 
 from .models import EmailVerifyRecord
-
-artist_choices = {
-    'Yes': True,
-    'No': False,
-}
 
 
 class ActiveUserView(View):
@@ -24,17 +19,79 @@ class ActiveUserView(View):
                 email = record.email
                 # search user by email
                 active_user = models.User.objects.get(email=email)
+                request.session['user_name'] = active_user.username
                 # activate user
                 active_user.is_active = True
                 active_user.save()
                 record.delete()  # the record not longer needed
                 request.session['is_login'] = True
                 request.session['user_id'] = active_user.id
-                request.session['user_name'] = active_user.username
                 return redirect('/user/index/')
+
         else:
             # probably need resend
             return render(request, "verification_fail.html")
+
+
+class UserResetView(View):
+    def get(self, request, reset_code):
+        all_records = EmailVerifyRecord.objects.filter(code=reset_code)
+        if all_records:
+            for record in all_records:
+                email = record.email
+                # search user by email
+                active_user = models.User.objects.get(email=email)
+                request.session['user_name'] = active_user.username
+                # activate user
+                record.delete()  # the record not longer needed
+                return redirect('/user/reset/')
+        else:
+            # probably need resend
+            return render(request, "verification_fail.html")
+
+
+# Use fore reset the password
+def reset(request):
+    if request.method == 'POST':
+        reset_form = ResetForm(request.POST)
+        if reset_form.is_valid():
+            user_name = request.session['user_name']
+            user = models.User.objects.get(username=user_name)
+            password1 = reset_form.cleaned_data['new_password1']
+            password2 = reset_form.cleaned_data['new_password2']
+            if password1 != password2:
+                message = 'Passwords are not the same'
+                return render(request, "user/reset_password.html", {'message': message})
+            user.password = password1
+            message = 'Password reset successfully, please login'
+            return render('/user/login', {'message': message})
+        message = 'The form is invalid, please check your form'
+        return render(request, "user/reset_password.html", {'message': message})
+    message = 'please enter your new password'
+    reset_form = ResetForm()
+    return render(request, "user/reset_password.html", {'message': message, 'reset_form':reset_form})
+
+
+# respond to the "forget password link"
+def retrieve(request):
+    if request.method == 'POST':
+        retrieve_form = RetrieveForm(request.POST)
+        if retrieve_form.is_valid():
+            email = retrieve_form.cleaned_data['email']
+            if models.User.objects.filter(email=email):
+                success = send_code_email(email, send_type="reset")
+                if success:
+                    return render(request, "user/success_send.html")
+                else:
+                    message = 'failed to send email that cannot reset password now'
+                    return render(request, 'user/retrieve_password.html', locals())
+            else:
+                message = 'The email does not exist'
+                return render(request, "user/retrieve_password.html", {'message': message})
+        message = 'The form is invalid, please check your form'
+        return render(request, "user/retrieve_password.html", {'message': message})
+    retrieve_form = RetrieveForm()
+    return render(request, "user/retrieve_password.html", {'retrieve_form': retrieve_form})
 
 
 def login(request):
@@ -174,20 +231,23 @@ def register(request):
                         ref_email = request.POST.get('refEmail')
                         new_user.refEmail = ref_email
                         real_name = request.POST.get('realName')
-                        send_code_email(email, referee_email=ref_email, send_type="register",
-                                        real_name=real_name, is_artist=True)
+                        success = send_code_email(email, referee_email=ref_email, send_type="register",
+                                                  real_name=real_name, is_artist=True)
                     else:
-                        send_code_email(email, send_type="register")
-                    try:
-                        additionalInfo.save()
-                        interest.save()
-                        new_user.interest = interest
-                        new_user.additionalInfo = additionalInfo
-                        new_user.save()
-                    except Exception as e:
-                        print(e)
-
-                    return redirect('/user/login/')
+                        success = send_code_email(email, send_type="register")
+                    if success:
+                        try:
+                            additionalInfo.save()
+                            interest.save()
+                            new_user.interest = interest
+                            new_user.additionalInfo = additionalInfo
+                            new_user.save()
+                        except Exception as e:
+                            print(e)
+                        return render(request, "user/success_send.html")
+                    else:
+                        message = 'failed to send email that cannot register you now'
+                        return render(request, 'user/register.html', {'message': message, 'register_form': stored_form})
             message = 'Please check the provided information such as Captcha'
             return render(request, 'user/register.html', {'message': message, 'register_form': stored_form})
     # if request is not valid, return a RegisterForm

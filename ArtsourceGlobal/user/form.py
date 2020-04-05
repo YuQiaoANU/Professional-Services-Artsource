@@ -76,3 +76,27 @@ class ProfileForm(forms.Form):
                                       widget=forms.CheckboxInput(attrs={'class': 'form-interest'}))
     art_design = forms.BooleanField(label='art_design', required=False,
                                     widget=forms.CheckboxInput(attrs={'class': 'form-interest'}))
+
+
+# forget.html, use for getting email
+class RetrieveForm(forms.Form):
+    email = forms.EmailField(required=True, label='Email address')
+    captcha = CaptchaField(error_messages={'invalid': 'wrong captcha'}, label='captcha')
+
+
+# reset.html, use for check new password
+class ResetForm(forms.Form):
+    new_password1 = forms.CharField(required=True, min_length=6, max_length=256, label='New password',
+                                    error_messages={'required': 'password cant be empty.',
+                                                    'min_length': "at least 6 digits"})
+    new_password2 = forms.CharField(required=True, min_length=6, max_length=256, label='Enter new password again',
+                                    error_messages={'required': 'password cant be empty..',
+                                                    'min_length': "at least 6 digits"})
+
+
+
+
+
+
+
+

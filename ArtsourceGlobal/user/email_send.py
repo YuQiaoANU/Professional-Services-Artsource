@@ -2,7 +2,7 @@ from random import Random  # generate random code
 from django.core.mail import send_mail  # the module used for sending email
 from user.models import EmailVerifyRecord
 from django.conf import settings
-
+from user import models
 import datetime
 
 
@@ -35,6 +35,8 @@ def send_code_email(email, referee_email='eeyzs1@zoho.com', send_type="register"
     email_record = EmailVerifyRecord()
     # store these info into database
     code = random_str(16)
+    while models.EmailVerifyRecord.objects.filter(code=code):
+        code = random_str(16)
     email_record.code = code
     email_record.email = email
     email_record.send_type = send_type
@@ -55,9 +57,9 @@ def send_code_email(email, referee_email='eeyzs1@zoho.com', send_type="register"
             send_status = send_mail(email_title, email_body, settings.EMAIL_FROM, [email])
         if not send_status:
             return False
-    if send_type == "retrieve":
-        email_title = "retrieve password"
-        email_body = "The retrieve password link is: http://127.0.0.1:8000/retrieve/{0}".format(code)
+    if send_type == "reset":
+        email_title = "reset password"
+        email_body = "The retrieve password link is: http://127.0.0.1:8000/reset/{0}".format(code)
         send_status = send_mail(email_title, email_body, settings.EMAIL_FROM, [email])
         if not send_status:
             return False

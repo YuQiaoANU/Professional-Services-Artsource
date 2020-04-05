@@ -74,7 +74,7 @@ class EmailVerifyRecord(models.Model):
     send_type = models.CharField(verbose_name="verifyCodeType", max_length=10,
                                  choices=(("register", "register"), ("forget", "retrieve")))
     send_time = models.DateTimeField(verbose_name="sendTime", default=datetime.now())
-
+    objects = models.Manager()
     class Meta:
         verbose_name = "Email verification code"
         verbose_name_plural = verbose_name
