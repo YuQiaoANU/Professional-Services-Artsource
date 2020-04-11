@@ -348,3 +348,7 @@ def edit_profile(request):
     })
 
     return render(request, 'user/editProfile.html', {'message': message, 'profile_form': profile_form})
+
+
+def register_middle(request):
+    return render(request, "user/register_middle.html")

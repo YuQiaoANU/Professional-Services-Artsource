@@ -32,13 +32,13 @@ urlpatterns = [
     path('artworkpage/', include('artworkpage.urls')),
     path('gallery/', include('gallery.urls')),
     path('user_profile/', include('user_profile.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
+    # path('accounts/', include('django.contrib.auth.urls')),
     path('', include(('booking.urls', 'booking'), namespace='booking')),
-    path('homeafterlogin/', views.index, name='homeAfterLogin'),
+    # path('homeafterlogin/', views.index, name='homeAfterLogin'),
     path('', include('homepage.urls')),
-    path('', include('user.urls')),
-
     path('user/', include('user.urls')),
+    path('', include('user.urls')),
+    path('oauth/', include('oauth.urls')),
     path('captcha', include('captcha.urls')),
     path('terms/', include('terms.urls')),
 ]

@@ -10,7 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
+from authlib.integrations.django_client import OAuth
 import os
+
+# disable the https check for development, should be deleted in production environment
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+os.environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "1"
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,6 +42,7 @@ INSTALLED_APPS = [
     'booking',
     'captcha',
     'terms',
+    'oauth',
     'django_countries',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -166,4 +172,41 @@ EMAIL_HOST_PASSWORD = "LKEDMORRPCOTHSSE"  # password: the password used for Auth
 # login
 EMAIL_USE_TLS = False  # use transport layer security or not
 EMAIL_FROM = "15763036963@163.com"  # which account send the email
-ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window; you may, of course, use a different value.
+# ACCOUNT_ACTIVATION_DAYS = 7  # One-week activation window; you may, of course, use a different value. currently
+# didnt use
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+#   remember to change these to your own ids and secrets
+GOOGLE_CLIENT_ID = '10025917122-ig33jq7vs6ceg3u48s98orha3n31rg2e.apps.googleusercontent.com'
+GOOGLE_CLIENT_SECRET = 'MFSnwDQRxJXq8DaRV3Sv3l3e'
+
+# register the apps
+oauth = OAuth()
+oauth.register(
+    name='google',
+    client_id=GOOGLE_CLIENT_ID,
+    client_secret=GOOGLE_CLIENT_SECRET,
+    access_token_url='https://oauth2.googleapis.com/token',
+    access_token_params=None,
+    authorize_url='https://accounts.google.com/o/oauth2/v2/auth',
+    authorize_params={'access_type': 'offline',
+                      'response_type': 'code'},
+    # api_base_url="https://accounts.google.com/o/oauth2/",
+    # userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo',
+    client_kwargs={'scope': "https://www.googleapis.com/auth/userinfo.profile"}
+    # "https://www.googleapis.com/auth/userinfo.email"
+)
+
+oauth.register(
+    name='facebook',
+    client_id='1052296011819502',
+    client_secret='fcb79bc8754e158ea251428f90b96248',
+    access_token_url='https://graph.facebook.com/v6.0/oauth/access_token',
+    access_token_params=None,
+    authorize_url='https://www.facebook.com/v6.0/dialog/oauth',
+    authorize_params=None,
+    client_kwargs={'scope': 'user:email'},
+)
+
+

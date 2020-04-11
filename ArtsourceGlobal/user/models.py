@@ -2,6 +2,7 @@ from datetime import datetime
 
 from django.db import models
 from django_countries.fields import CountryField
+# from django.contrib.auth.models import AbstractUser
 
 
 class Interest(models.Model):
@@ -41,6 +42,7 @@ class AdditionalInfo(models.Model):
         verbose_name_plural = 'AdditionalInfo'
 
 
+# class User(AbstractUser):
 class User(models.Model):
     """User table"""
     # id = models.AutoField(primary_key=True)  # the django will create this one automatically

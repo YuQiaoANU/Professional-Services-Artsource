@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+    {% extends 'base.html' %}
+    {% block title %}To show the info{% endblock %}
+    {% block content %}
+
+            {% if message %}
+                    <div>{{ message }}</div>
+            {% else %}
+                    <div>didnt get expected info</div>
+            {% endif %}
+
+
+    {% endblock %}
+
+
+</body>
+</html>
