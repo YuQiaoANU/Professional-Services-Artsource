@@ -13,10 +13,10 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 from authlib.integrations.django_client import OAuth
 import os
 
-# disable the https check for development, should be deleted in production environment
-os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
-os.environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "1"
-
+# # disable the https check for development, should be deleted in production environment
+# os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+# os.environ["OAUTHLIB_RELAX_TOKEN_SCOPE"] = "1"
+# APPEND_SLASH = False
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'werkzeug_debugger_runserver',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -209,4 +211,15 @@ oauth.register(
     client_kwargs={'scope': 'user:email'},
 )
 
+oauth.register(
+    name='github',
+    client_id='c5e62cb737afdf029e7b',
+    client_secret='6d6ffbf355a3ecb8c55b5b56d873575ba667fc68',
+    access_token_url='https://github.com/login/oauth/access_token',
+    access_token_params=None,
+    authorize_url='https://github.com/login/oauth/authorize',
+    authorize_params=None,
+    api_base_url='https://api.github.com/',
+    client_kwargs={'scope': 'user:email'},
+)
 

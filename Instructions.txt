@@ -13,6 +13,8 @@ pip3 install -r requirements.txt
 
 you can run server by:
 python manage.py runserver
+if you need ssl to ensure the https features (so you can use thrid party authentication)
+python manage.py runserver_plus --cert cert.crt 127.0.0.0:8000
 
 create super user by:
 python manage.py createsuperuser
