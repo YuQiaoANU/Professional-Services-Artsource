@@ -1,3 +1,7 @@
+To modify the db, you need change code in model files, then use below command lines:
+python manage.py makemigrations 
+python manage.py migrate 
+
 make sure you are on the same dir that contains manage.py
 create requirements.txt, put it in the same dir of manage.py
 pip3 maybe changed to pip
@@ -14,7 +18,9 @@ pip3 install -r requirements.txt
 you can run server by:
 python manage.py runserver
 if you need ssl to ensure the https features (so you can use thrid party authentication)
-python manage.py runserver_plus --cert cert.crt 127.0.0.0:8000
+python manage.py runserver_plus --cert-file cert.crt
+When you have your own certificate:
+python manage.py runserver_plus --cert-file /tmp/cert.crt
 
 create super user by:
 python manage.py createsuperuser

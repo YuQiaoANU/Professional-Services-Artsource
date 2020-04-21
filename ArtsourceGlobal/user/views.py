@@ -5,10 +5,11 @@ from django.views import View
 
 from user import models
 from .email_send import send_code_email
-from .form import UserForm, RegisterForm, ProfileForm, ResetForm, RetrieveForm
+from .form import UserForm, RegisterForm, ProfileForm, ResetForm, RetrieveForm, UploadForm
 import hashlib
 
 from .models import EmailVerifyRecord
+from artworkpage.models import Artwork
 
 
 class ActiveUserView(View):
@@ -69,7 +70,7 @@ def reset(request):
         return render(request, "user/reset_password.html", {'message': message})
     message = 'please enter your new password'
     reset_form = ResetForm()
-    return render(request, "user/reset_password.html", {'message': message, 'reset_form':reset_form})
+    return render(request, "user/reset_password.html", {'message': message, 'reset_form': reset_form})
 
 
 # respond to the "forget password link"
@@ -352,3 +353,22 @@ def edit_profile(request):
 
 def register_middle(request):
     return render(request, "user/register_middle.html")
+
+
+def upload_artwork(request):
+    if request.method == 'POST':
+        upload_form = UploadForm(request.POST, request.FILES)
+        if upload_form.is_valid():
+            artwork = Artwork()
+            current_user_name = request.session.get('user_name')
+            user = models.User.objects.get(username=current_user_name)
+            artwork.name = upload_form.cleaned_data['name']
+            artwork.image = upload_form.cleaned_data['image']
+            artwork.user = user
+            artwork.save()
+            return redirect('/user/profile/')
+        print("didnt store")
+        upload_form = UploadForm()
+        return render(request, "user/upload_artwork.html", {'upload_form': upload_form})
+    upload_form = UploadForm()
+    return render(request, "user/upload_artwork.html", {'upload_form': upload_form})

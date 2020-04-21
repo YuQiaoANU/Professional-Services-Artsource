@@ -3,6 +3,7 @@ from captcha.fields import CaptchaField
 from django_countries.widgets import CountrySelectWidget
 from django_countries.fields import LazyTypedChoiceField
 from django_countries import countries
+from artworkpage.models import Artwork
 
 gender_choices = (
     ('Male', 'Male'),
@@ -94,9 +95,18 @@ class ResetForm(forms.Form):
                                                     'min_length': "at least 6 digits"})
 
 
+class UploadForm(forms.ModelForm):
+    class Meta:
+        model = Artwork
+        fields = ('name', 'image')
+        exclude = None
+        labels = ('name of artwork', 'upload the image')
+        help_texts = None
+        widgets = None
+        error_messages = {
+            'image': {
+                'invalid_image': 'please upload image format!'
+            }
 
-
-
-
-
+        }
 
