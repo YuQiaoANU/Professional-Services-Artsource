@@ -10,6 +10,8 @@ import hashlib
 
 from .models import EmailVerifyRecord
 from artworkpage.models import Artwork
+from artworkpage.Image_tools import resize
+# from PIL import Image
 
 
 class ActiveUserView(View):
@@ -363,7 +365,9 @@ def upload_artwork(request):
             current_user_name = request.session.get('user_name')
             user = models.User.objects.get(username=current_user_name)
             artwork.name = upload_form.cleaned_data['name']
-            artwork.image = upload_form.cleaned_data['image']
+            image = upload_form.cleaned_data['image']
+            artwork.image = image
+            # artwork.thumbnail = resize(image)
             artwork.user = user
             artwork.save()
             return redirect('/user/profile/')
